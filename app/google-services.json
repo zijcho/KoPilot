@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "1029787478076",
+    "firebase_url": "https://kopilot-database.firebaseio.com",
+    "project_id": "kopilot-database",
+    "storage_bucket": "kopilot-database.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1029787478076:android:12cb40df2e1dcb4b",
+        "android_client_info": {
+          "package_name": "monash.zi.kopilot"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1029787478076-vc5i8b6p4ovtgnbn7ea6e23u65uhqa0c.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "monash.zi.kopilot",
+            "certificate_hash": "33c8606f99cb6579c7c6b9959a8effd4068168a3"
+          }
+        },
+        {
+          "client_id": "1029787478076-7l965go1ugtvte45ki01pu8c9um43mtr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC7UA35Bz5j5RMe_wKx66Iq5apGj6m9c6Y"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1029787478076-7l965go1ugtvte45ki01pu8c9um43mtr.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">KoPilot</string>
+    <string name="title_activity_planet_info">Planet information activity</string>
+    <string name="button_str_routes_missions">Routes and missions</string>
+    <string name="button_str_calculate_dv">Calculate ∆v</string>
+    <string name="button_str_checklists">Pre-launch checklists</string>
+    <string name="button_str_create_route">Create a route</string>
+    <string name="button_str_save_missions">My saved missions</string>
+    <string name="button_str_user_missions">Other user\'s missions</string>
+    <string name="button_str_route_start">Select start</string>
+    <string name="button_str_route_stop">Select stop</string>
+    <string name="button_str_route_destination">Select destination</string>
+    <string name="button_str_create_mission">Create mission from route</string>
+</resources>
