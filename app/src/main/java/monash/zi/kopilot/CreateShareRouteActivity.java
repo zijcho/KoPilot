@@ -1,5 +1,6 @@
 package monash.zi.kopilot;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -19,6 +20,7 @@ public class CreateShareRouteActivity extends AppCompatActivity {
     TextView DvEstimate;
 
 
+    @SuppressLint("DefaultLocale")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,7 +36,8 @@ public class CreateShareRouteActivity extends AppCompatActivity {
 
         // Route details from previous intent
         final ArrayList<String> plannedRoute = getIntent().getStringArrayListExtra("plannedRoute");
-
+        // Set text views to display planet route info
+        setTextViewsFromRouteDetails(plannedRoute);
 
 
         // set listeners
@@ -65,12 +68,13 @@ public class CreateShareRouteActivity extends AppCompatActivity {
         });
     }
 
-    private void setTextViewsFromRouteDetails() {
-
+    private void setTextViewsFromRouteDetails(ArrayList<String> planetsInRoute) {
+        routeDescription.setText(String.format("Approximate ∆v required from %s to %s:", planetsInRoute.get(0), planetsInRoute.get(1)));
+        DvEstimate.setText(String.format("%d m/s", estimateRouteDeltaV(planetsInRoute)));
     }
 
     private int estimateRouteDeltaV(ArrayList<String> planetsInRoute) {
       //todo: Stubbed the (actual) value for the DV required to get to the mun from Kerbin, need implement deltaV reqs from the 'subway map' of values in the Solar System.
         return 5150;
-    };
+    }
 }

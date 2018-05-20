@@ -27,7 +27,8 @@
         <activity android:name=".DvCalculatorActivity" />
         <activity android:name=".ChecklistViewActivity" />
         <activity android:name=".ChecklistCreateActivity" />
-        <activity android:name=".ChecklistListViewActivity"></activity>
+        <activity android:name=".ChecklistListViewActivity" />
+        <activity android:name=".RouteUserMissionsActivity"></activity>
     </application>
 
 </manifest>

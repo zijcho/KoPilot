@@ -25,7 +25,7 @@ public class CreateRouteDestActivity extends AppCompatActivity {
 
     String tempPlanetSelection = "Mun"; //todo: Demo stub
 
-    ArrayList<String> planetsInRoute;
+    ArrayList<String> planetsInRoute = new ArrayList<>();
 
 
     @Override
@@ -60,7 +60,7 @@ public class CreateRouteDestActivity extends AppCompatActivity {
         planetSelectButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent newIntent = new Intent(CreateRouteDestActivity.this, RouteMissionsActivity.class);
+                Intent newIntent = new Intent(CreateRouteDestActivity.this, CreateShareRouteActivity.class);
 
                 // Whatever the selected destination planet is
                 planetsInRoute.add(startingPlanet);
