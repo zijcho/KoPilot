@@ -45,4 +45,28 @@ public class Checklist implements Parcelable{
         parcel.writeString(checklistDescription);
         parcel.writeStringList(checklistItems);
     }
+
+    public String getChecklistName() {
+        return checklistName;
+    }
+
+    public void setChecklistName(String checklistName) {
+        this.checklistName = checklistName;
+    }
+
+    public String getChecklistDescription() {
+        return checklistDescription;
+    }
+
+    public void setChecklistDescription(String checklistDescription) {
+        this.checklistDescription = checklistDescription;
+    }
+
+    public ArrayList<String> getChecklistItems() {
+        return checklistItems;
+    }
+
+    public void setChecklistItems(ArrayList<String> checklistItems) {
+        this.checklistItems = checklistItems;
+    }
 }

@@ -7,40 +7,10 @@
     android:background="@drawable/skybox"
     tools:context="monash.zi.kopilot.CreateRouteStartActivity">
 
-    <TextView
-        android:id="@+id/startPlanetTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:text="Planet Name"
-        android:textSize="30sp"
-        app:layout_constraintBottom_toTopOf="@+id/startPlanetImageView"
-        app:layout_constraintEnd_toStartOf="@+id/startPlanetImageView"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/startPlanetImageView" />
-
-    <ImageView
-        android:id="@+id/startPlanetImageView"
-        android:layout_width="300dp"
-        android:layout_height="300dp"
-        android:layout_marginTop="80dp"
-        android:contentDescription="Start Planet Image"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/placeholder_planet" />
-
-    <Button
-        android:id="@+id/startPlanetButton"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="48dp"
-        android:layout_marginEnd="64dp"
-        android:layout_marginStart="64dp"
-        android:text="@string/button_str_route_start"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent" />
+    <android.support.v4.view.ViewPager
+        android:id="@+id/c_r_start_vp"
+        android:layout_width="368dp"
+        android:layout_height="495dp"
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="8dp" />
 </android.support.constraint.ConstraintLayout>
