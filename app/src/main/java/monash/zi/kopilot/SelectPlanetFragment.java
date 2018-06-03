@@ -1,6 +1,7 @@
 package monash.zi.kopilot;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -8,6 +9,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -18,10 +20,11 @@ import com.google.firebase.storage.StorageReference;
 
 
 public class SelectPlanetFragment extends Fragment {
-    private String planetNameText;
+    String planetNameText;
 
-    private TextView planetName;
-    private ImageView planetImage;
+    TextView planetName;
+    ImageView planetImage;
+    Button planetSelectButton;
 
     public SelectPlanetFragment() {
         // Required empty public constructor
@@ -45,18 +48,18 @@ public class SelectPlanetFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_select_planet, container, false);
+        View parentView = inflater.inflate(R.layout.fragment_select_planet, container, false);
 
-        planetName = (TextView) view.findViewById(R.id.FragTextView);
-        planetImage = (ImageView) view.findViewById(R.id.FragImageView);
+        planetName = parentView.findViewById(R.id.FragTextView);
+        planetImage = parentView.findViewById(R.id.FragImageView);
 
         planetName.setText(planetNameText);
         loadDefaultDataFirebase(planetNameText);
 
-        return view;
+        return parentView;
     }
 
     @Override
@@ -95,9 +98,5 @@ public class SelectPlanetFragment extends Fragment {
                 System.out.println("Error in image download");
             }
         });
-    }
-
-    public void setPlanetName(String text) {
-
     }
 }

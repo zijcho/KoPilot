@@ -20,19 +20,6 @@
         app:layout_constraintStart_toEndOf="@+id/FragImageView"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/FragButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:elevation="0dp"
-        android:text="@string/button_str_route_start"
-        android:textAlignment="center"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/FragImageView"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/FragImageView" />
-
     <ImageView
         android:id="@+id/FragImageView"
         android:layout_width="0dp"
