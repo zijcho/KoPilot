@@ -23,16 +23,9 @@ import com.google.firebase.storage.StorageReference;
 import java.util.ArrayList;
 
 public class CreateRouteStartActivity extends AppCompatActivity {
-    // for the purposes of the demo, I'll hard code in the start and end points, but it is important to note
-    // that since we're demonstrating the fire-base interaction, it's stressed that little to no data of the planets
-    // themselves are stored locally.
 
-    Button planetSelectButton;
-
-    ArrayList<String> planetList;
     Route newRoute;
-
-    private ViewPager mViewPager;
+    ViewPager mViewPager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +37,10 @@ public class CreateRouteStartActivity extends AppCompatActivity {
         mViewPager = (ViewPager)
                 findViewById(R.id.c_r_start_vp);
         mViewPager.setAdapter(new SectionsPagerAdapter(getSupportFragmentManager()));
-        mViewPager.setCurrentItem(0);
+        mViewPager.setCurrentItem(3);
+
+        mViewPager.setClipToPadding(false);
+        mViewPager.setPadding(100,0,100,0);
 
 
         // set listeners
@@ -70,23 +66,24 @@ public class CreateRouteStartActivity extends AppCompatActivity {
 //        });
     }
 
-    private void setupPlanetList() {
+    private ArrayList<Fragment> setupPlanetFragments() {
         // Todo: loop/get data (planet names) from firebase instead
+        ArrayList<Fragment> fragmentList = new ArrayList<>();
+        String[] planetNameList = {"Moho", "Eve", "Gilly", "Kerbin", "Mun", "Minmus", "Duna", "Ike", "Jool", "Laythe", "Vall", "Tylo", "Bop", "Eeloo"};
 
-        planetList.add("Kerbin");
-        planetList.add("Mun");
-        planetList.add("Minmus");
+        // SelectPlanetFragment.newInstance("")
+
+        for (String aPlanetNameList : planetNameList) {
+            Fragment newFrag = SelectPlanetFragment.newInstance(aPlanetNameList);
+            fragmentList.add(newFrag);
+        }
+
+        return fragmentList;
     }
 
     private class SectionsPagerAdapter extends FragmentPagerAdapter {
 
-        private String[] mPageTitles = {}; // For tab?
-        // Fragment not showing on screen
-
-        Fragment newFrag1 = SelectPlanetFragment.newInstance("Kerbin");
-        Fragment newFrag2 = SelectPlanetFragment.newInstance("Mun");
-
-        private Fragment[] mFragments = {newFrag1, newFrag2};
+        private ArrayList<Fragment> mFragments = setupPlanetFragments();
 
         public SectionsPagerAdapter(FragmentManager fm) {
             super(fm);
@@ -94,12 +91,12 @@ public class CreateRouteStartActivity extends AppCompatActivity {
 
         @Override
         public Fragment getItem(int position) {
-            return mFragments[position];
+            return mFragments.get(position);
         }
 
         @Override
         public int getCount() {
-            return mFragments.length;
+            return mFragments.size();
         }
     }
 }

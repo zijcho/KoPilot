@@ -48,8 +48,7 @@ public class SelectPlanetFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-
-        View view = inflater.inflate(R.layout.fragment_select_planet, container);
+        View view = inflater.inflate(R.layout.fragment_select_planet, container, false);
 
         planetName = (TextView) view.findViewById(R.id.FragTextView);
         planetImage = (ImageView) view.findViewById(R.id.FragImageView);
@@ -57,7 +56,7 @@ public class SelectPlanetFragment extends Fragment {
         planetName.setText(planetNameText);
         loadDefaultDataFirebase(planetNameText);
 
-        return inflater.inflate(R.layout.fragment_select_planet, container, false);
+        return view;
     }
 
     @Override
@@ -96,5 +95,9 @@ public class SelectPlanetFragment extends Fragment {
                 System.out.println("Error in image download");
             }
         });
+    }
+
+    public void setPlanetName(String text) {
+
     }
 }
