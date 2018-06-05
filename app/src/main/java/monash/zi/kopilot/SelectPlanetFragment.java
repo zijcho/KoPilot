@@ -24,7 +24,6 @@ public class SelectPlanetFragment extends Fragment {
 
     TextView planetName;
     ImageView planetImage;
-    Button planetSelectButton;
 
     public SelectPlanetFragment() {
         // Required empty public constructor
@@ -70,6 +69,10 @@ public class SelectPlanetFragment extends Fragment {
     @Override
     public void onDetach() {
         super.onDetach();
+    }
+
+    public String getPlanetNameText(){
+       return planetNameText;
     }
 
     private void loadDefaultDataFirebase(String planetToLoadString) {

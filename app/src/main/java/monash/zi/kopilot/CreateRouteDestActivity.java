@@ -15,7 +15,8 @@ public class CreateRouteDestActivity extends AppCompatActivity {
     ViewPager mViewPager;
     Button planetSelectButton;
 
-    ArrayList<String> planetsInRoute = new ArrayList<>();
+    private ArrayList<String> planetsInRoute = new ArrayList<>();
+    private String[] planetNameList = {"Moho", "Eve", "Gilly", "Kerbin", "Mun", "Minmus", "Duna", "Ike", "Jool", "Laythe", "Vall", "Tylo", "Bop", "Eeloo"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,7 +57,7 @@ public class CreateRouteDestActivity extends AppCompatActivity {
 
                 // Whatever the selected destination planet is
                 planetsInRoute.add(startingPlanet);
-                planetsInRoute.add(""); // replace with get from fragment
+                planetsInRoute.add(planetNameList[mViewPager.getCurrentItem()]); // replace with get from fragment
 
                 // Pass along the route array to the final activity in the route creation
                 newIntent.putStringArrayListExtra("plannedRoute", planetsInRoute);
@@ -67,7 +68,6 @@ public class CreateRouteDestActivity extends AppCompatActivity {
 
     private ArrayList<Fragment> setupPlanetFragments() {
         ArrayList<Fragment> fragmentList = new ArrayList<>();
-        String[] planetNameList = {"Moho", "Eve", "Gilly", "Kerbin", "Mun", "Minmus", "Duna", "Ike", "Jool", "Laythe", "Vall", "Tylo", "Bop", "Eeloo"};
 
         for (String aPlanetNameList : planetNameList) {
             Fragment newFrag = SelectPlanetFragment.newInstance(aPlanetNameList);

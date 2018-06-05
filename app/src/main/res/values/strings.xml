@@ -11,7 +11,6 @@
     <string name="button_str_route_stop">Select stop</string>
     <string name="button_str_route_destination">Select destination</string>
     <string name="button_str_create_mission">Create mission from route</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="button_str_planet_info">Planet Info</string>
+    <string name="hello_blank_fragment">blank fragment</string>
 </resources>
