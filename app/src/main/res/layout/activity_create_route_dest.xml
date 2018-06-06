@@ -7,30 +7,16 @@
     android:background="@drawable/skybox"
     tools:context="monash.zi.kopilot.CreateRouteDestActivity">
 
-    <TextView
-        android:id="@+id/destPlanetTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <android.support.v4.view.ViewPager
+        android:id="@+id/c_r_vp_dest"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:layout_marginBottom="16dp"
-        android:text="Planet Name"
-        android:textAlignment="center"
-        android:textSize="30sp"
-        app:layout_constraintBottom_toTopOf="@+id/destPlanetImageView"
+        android:layout_marginTop="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/destPlanetButton"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <ImageView
-        android:id="@+id/destPlanetImageView"
-        android:layout_width="300dp"
-        android:layout_height="300dp"
-        android:layout_marginTop="80dp"
-        android:contentDescription="Destination Planet Image"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/placeholder_planet" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/destPlanetButton"
@@ -42,6 +28,6 @@
         android:text="@string/button_str_route_destination"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent" />
 </android.support.constraint.ConstraintLayout>

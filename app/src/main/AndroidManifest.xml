@@ -29,6 +29,15 @@
         <activity android:name=".ChecklistCreateActivity" />
         <activity android:name=".ChecklistListViewActivity" />
         <activity android:name=".RouteUserMissionsActivity"></activity>
+
+        <!-- Google Play Services Version -->
+        <meta-data android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version"
+            />
+        <!-- Android Google Maps API v2 Key -->
+        <meta-data
+            android:name="com.google.android.maps.v2"
+            android:value="AIzaSyALDknQ8M2CiVxVYQJmn1upfr1jMzXNU9k"/>
     </application>
 
 </manifest>

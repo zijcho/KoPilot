@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/PlanetTextView"
+            android:layout_width="match_parent"
+            android:layout_height="25dp"
+            android:layout_weight="1"
+            android:text="Planet Name"
+            android:textSize="30sp" />
+
+        <ImageView
+            android:id="@+id/PlanetImageView"
+            app:srcCompat="@drawable/placeholder_planet"
+            tools:layout_editor_absoluteX="84dp"
+            tools:layout_editor_absoluteY="80dp"
+            android:layout_width="256dp"
+            android:layout_height="256dp"
+            android:layout_weight="1"
+            android:contentDescription="Start Planet Image" />
+
+        <TextView
+            android:id="@+id/PlanetInformationTextView"
+            android:layout_width="match_parent"
+            android:layout_height="126dp"
+            android:layout_weight="1"
+            android:text="Planet Infomation"
+            android:textAllCaps="false"
+            android:textSize="30sp" />
+    </LinearLayout>
+
+</LinearLayout>
