@@ -74,14 +74,9 @@ public class CreateShareRouteActivity extends AppCompatActivity {
 //                Intent newIntent = new Intent(CreateShareRouteActivity.this, UserMissionCreateActivity.class);
 //                newIntent.putExtra("planetToView", tempPlanetSelection);
 //                startActivity(newIntent);
+                finish();
             }
         });
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-        finish();
     }
 
     private void setTextViewsFromRouteDetails(ArrayList<String> planetsInRoute) {

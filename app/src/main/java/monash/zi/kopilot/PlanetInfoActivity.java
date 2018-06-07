@@ -137,7 +137,7 @@ public class PlanetInfoActivity extends AppCompatActivity {
             case "Duna":
             case "Ike":
                 return planetarySystems[1];
-            case "Eeeloo":
+            case "Eeloo":
                 return planetarySystems[2];
             case "Eve":
             case "Gilly":

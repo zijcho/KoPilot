@@ -17,7 +17,7 @@ public class CreateRouteDestActivity extends AppCompatActivity {
     Button planetInfoButton;
 
     private ArrayList<String> planetsInRoute = new ArrayList<>();
-    private String[] planetNameList = {"Moho", "Eve", "Gilly", "Kerbin", "Mun", "Minmus", "Duna", "Ike", "Jool", "Laythe", "Vall", "Tylo", "Bop", "Eeloo"};
+    private String[] planetNameList = {"Moho", "Eve", "Gilly", "Kerbin", "Mun", "Minmus", "Duna", "Ike","Dres", "Jool", "Laythe", "Vall", "Tylo", "Bop", "Eeloo"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +38,7 @@ public class CreateRouteDestActivity extends AppCompatActivity {
         mViewPager.setPadding(100,0,100,0);
 
         planetSelectButton = findViewById(R.id.destPlanetButton);
-//        planetInfoButton = findViewById(R.id.destPlanetInfoButton);
+        planetInfoButton = findViewById(R.id.destPlanetInfoButton);
 
         // set listeners
         // Button: Select destination, and finish route creation

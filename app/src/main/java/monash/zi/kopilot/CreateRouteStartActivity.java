@@ -16,7 +16,7 @@ public class CreateRouteStartActivity extends AppCompatActivity {
     Button planetSelectButton;
     Button planetInfoButton;
 
-    private String[] planetNameList = {"Moho", "Eve", "Gilly", "Kerbin", "Mun", "Minmus", "Duna", "Ike", "Jool", "Laythe", "Vall", "Tylo", "Bop", "Eeloo"};
+    private String[] planetNameList = {"Moho", "Eve", "Gilly", "Kerbin", "Mun", "Minmus", "Duna", "Ike","Dres", "Jool", "Laythe", "Vall", "Tylo", "Bop", "Eeloo"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

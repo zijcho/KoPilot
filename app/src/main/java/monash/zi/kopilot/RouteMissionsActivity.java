@@ -9,7 +9,6 @@ import android.widget.Button;
 public class RouteMissionsActivity extends AppCompatActivity {
 
     Button createRoute;
-    Button savedRoutes;
     Button userMissions;
 
     @Override
@@ -20,7 +19,6 @@ public class RouteMissionsActivity extends AppCompatActivity {
 
         // init
         createRoute = findViewById(R.id.buttonCreateRoute);
-        savedRoutes = findViewById(R.id.buttonSavedMissions);
         userMissions = findViewById(R.id.buttonUserMissions);
 
         // set listeners
@@ -30,14 +28,6 @@ public class RouteMissionsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(RouteMissionsActivity.this, CreateRouteStartActivity.class));
-            }
-        });
-
-        // Button: Locally saved missions
-        savedRoutes.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-//                startActivity(new Intent(RouteMissionsActivity.this, RouteSavedActivity.class));
             }
         });
 

@@ -6,7 +6,7 @@
     <string name="button_str_checklists">Pre-launch checklists</string>
     <string name="button_str_create_route">Create a route</string>
     <string name="button_str_save_missions">My saved missions</string>
-    <string name="button_str_user_missions">Other user\'s missions</string>
+    <string name="button_str_user_missions">User missions</string>
     <string name="button_str_route_start">Select start</string>
     <string name="button_str_route_stop">Select stop</string>
     <string name="button_str_route_destination">Select destination</string>
