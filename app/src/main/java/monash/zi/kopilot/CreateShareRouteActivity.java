@@ -4,11 +4,21 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 import java.util.ArrayList;
+import java.util.HashMap;
+
+import static android.content.ContentValues.TAG;
 
 public class CreateShareRouteActivity extends AppCompatActivity {
 
@@ -68,13 +78,100 @@ public class CreateShareRouteActivity extends AppCompatActivity {
         });
     }
 
-    private void setTextViewsFromRouteDetails(ArrayList<String> planetsInRoute) {
-        routeDescription.setText(String.format("Approximate ∆v required from %s to %s:", planetsInRoute.get(0), planetsInRoute.get(1)));
-        DvEstimate.setText(String.format("%d m/s", estimateRouteDeltaV(planetsInRoute)));
+    @Override
+    public void onStop() {
+        super.onStop();
+        finish();
     }
 
-    private int estimateRouteDeltaV(ArrayList<String> planetsInRoute) {
-      //todo: Stubbed the (actual) value for the DV required to get to the mun from Kerbin, need implement deltaV reqs from the 'subway map' of values in the Solar System.
-        return 5150;
+    private void setTextViewsFromRouteDetails(ArrayList<String> planetsInRoute) {
+        routeDescription.setText(String.format("Approximate ∆v required from %s to %s:", planetsInRoute.get(0), planetsInRoute.get(1)));
+        DvEstimate.setText("0");
+
+        estimateRouteDeltaV(planetsInRoute);
+    }
+
+    private void estimateRouteDeltaV(ArrayList<String> planetsInRoute) {
+        boolean kerbinInRouteFlag = false;
+
+        if (planetsInRoute.get(0).toLowerCase().equals("kerbin") || planetsInRoute.get(1).toLowerCase().equals("kerbin")) {
+            kerbinInRouteFlag = true;
+        }
+
+        getPlanetKDV(planetsInRoute.get(0), kerbinInRouteFlag);
+        getPlanetKDV(planetsInRoute.get(1), kerbinInRouteFlag);
+    }
+
+    private void getPlanetKDV(String planetNameStr, final boolean kerbinInRoute) {
+        // Set refs to the database
+        String planetarySystemReference = retrievePlanetSystem(planetNameStr);
+
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference myRef = database.getReference("Planets");
+        DatabaseReference planetRef = myRef.child(planetarySystemReference).child(planetNameStr);
+
+        // listener attachment
+        planetRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                // This method is called once with the initial value and again
+                // whenever data at this location is updated.
+                // Constant real-time changes would be rare however.
+                HashMap value = (HashMap) dataSnapshot.getValue();
+
+                // Logic for calculating the est DV.
+                int currDv = Integer.valueOf(DvEstimate.getText().toString());
+
+                if (kerbinInRoute) {
+                    currDv += Integer.valueOf(value.get("kDV").toString());
+                }
+                else {
+                    currDv += Integer.valueOf(value.get("kDV").toString()) - 3400;
+                }
+
+                DvEstimate.setText(String.valueOf(currDv));
+
+                Log.d(TAG, "Value is: " + value);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+                // Failed to read value
+                Log.w(TAG, "Failed to read value.", error.toException());
+            }
+        });
+    }
+
+    // Input a planet name, function will return it's planetary system that the planet resides in.
+    private String retrievePlanetSystem(String inputPlanetName) {
+        String[] planetarySystems = {"Dres System", "Duna System", "Eeloo System", "Eve System", "Jool System", "Kerbin System", "Moho System"};
+
+        switch (inputPlanetName) {
+            case "Dres":
+                return planetarySystems[0];
+            case "Duna":
+            case "Ike":
+                return planetarySystems[1];
+            case "Eeloo":
+                return planetarySystems[2];
+            case "Eve":
+            case "Gilly":
+                return planetarySystems[3];
+            case "Jool":
+            case "Bop":
+            case "Laythe":
+            case "Pol":
+            case "Tylo":
+            case "Vall":
+                return planetarySystems[4];
+            case "Kerbin":
+            case "Mun":
+            case "Minmus":
+                return planetarySystems[5];
+            case "Moho":
+                return planetarySystems[6];
+            default:
+                return "ERROR: Input planet name is invalid";
+        }
     }
 }

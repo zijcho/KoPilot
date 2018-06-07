@@ -127,7 +127,7 @@ public class PlanetInfoActivity extends AppCompatActivity {
 
     }
 
-    // Inputting a planet name, function will return it's planet system that the planet resides in.
+    // Input a planet name, function will return it's planetary system that the planet resides in.
     private String retrievePlanetSystem(String inputPlanetName) {
         String[] planetarySystems = {"Dres System", "Duna System", "Eeloo System", "Eve System", "Jool System", "Kerbin System", "Moho System"};
 

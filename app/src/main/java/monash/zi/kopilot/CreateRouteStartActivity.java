@@ -37,8 +37,6 @@ public class CreateRouteStartActivity extends AppCompatActivity {
 
 
         // set listeners
-        // Button: Routes and user missions
-
         // Button: Select destination
         planetSelectButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -46,9 +44,11 @@ public class CreateRouteStartActivity extends AppCompatActivity {
                 Intent newIntent = new Intent(CreateRouteStartActivity.this, CreateRouteDestActivity.class);
                 newIntent.putExtra("planetStartPoint", planetNameList[mViewPager.getCurrentItem()]);
                 startActivity(newIntent);
+                finish();
             }
         });
 
+        // Button: View planet info
         planetInfoButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
