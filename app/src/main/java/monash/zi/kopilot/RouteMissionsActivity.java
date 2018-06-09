@@ -22,7 +22,6 @@ public class RouteMissionsActivity extends AppCompatActivity {
         userMissions = findViewById(R.id.buttonUserMissions);
 
         // set listeners
-        // todo: Implement Saved routes and user mission functionality.
         // Button: Start creating a route
         createRoute.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -35,7 +34,7 @@ public class RouteMissionsActivity extends AppCompatActivity {
         userMissions.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                startActivity(new Intent(RouteMissionsActivity.this, RouteUserMissionActivity.class));
+                startActivity(new Intent(RouteMissionsActivity.this, RouteUserMissionsActivity.class));
             }
         });
     }

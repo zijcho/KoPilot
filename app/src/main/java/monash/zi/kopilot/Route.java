@@ -13,14 +13,12 @@ public class Route implements Parcelable {
     private String routeDescription;
     private String startPlanet;
     private String destPlanet;
-    private ArrayList<String> stops;
 
     protected Route(Parcel in) {
         routeName = in.readString();
         routeDescription = in.readString();
         startPlanet = in.readString();
         destPlanet = in.readString();
-        stops = in.createStringArrayList();
     }
 
     public static final Creator<Route> CREATOR = new Creator<Route>() {
@@ -46,7 +44,6 @@ public class Route implements Parcelable {
         dest.writeString(routeDescription);
         dest.writeString(startPlanet);
         dest.writeString(destPlanet);
-        dest.writeStringList(stops);
     }
 
     public String getRouteName() {
@@ -79,14 +76,6 @@ public class Route implements Parcelable {
 
     public void setDestPlanet(String destPlanet) {
         this.destPlanet = destPlanet;
-    }
-
-    public ArrayList<String> getStops() {
-        return stops;
-    }
-
-    public void setStops(ArrayList<String> stops) {
-        this.stops = stops;
     }
 
 }

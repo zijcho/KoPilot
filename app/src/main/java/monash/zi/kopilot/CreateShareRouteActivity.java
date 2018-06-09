@@ -71,9 +71,9 @@ public class CreateShareRouteActivity extends AppCompatActivity {
         createUserMission.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Intent newIntent = new Intent(CreateShareRouteActivity.this, UserMissionCreateActivity.class);
-//                newIntent.putExtra("planetToView", tempPlanetSelection);
-//                startActivity(newIntent);
+                Intent newIntent = new Intent(CreateShareRouteActivity.this, SaveRouteActivity.class);
+                newIntent.putStringArrayListExtra("planetsInRoute", plannedRoute);
+                startActivity(newIntent);
                 finish();
             }
         });
