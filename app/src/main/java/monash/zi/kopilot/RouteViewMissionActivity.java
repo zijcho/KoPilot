@@ -1,12 +1,8 @@
 package monash.zi.kopilot;
 
-import android.annotation.SuppressLint;
-import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 
 import com.google.firebase.database.DataSnapshot;
@@ -20,70 +16,42 @@ import java.util.HashMap;
 
 import static android.content.ContentValues.TAG;
 
-public class CreateShareRouteActivity extends AppCompatActivity {
+public class RouteViewMissionActivity extends AppCompatActivity {
 
-    Button gotoChecklist;
-    Button gotoDVCalculator;
-    Button createUserMission;
+    TextView routeTitleTextView;
+    TextView routePlanetsTextView;
+    TextView routeDVTextView;
+    TextView routeDescriptionTextView;
+    TextView routeCreatorTextView;
 
-    TextView routeDescription;
-    TextView DvEstimate;
-
-
-    @SuppressLint("DefaultLocale")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_create_share_route);
+        setContentView(R.layout.activity_route_view_mission);
 
-        // init
-        gotoChecklist = findViewById(R.id.gotoChecklistButton);
-        gotoDVCalculator = findViewById(R.id.gotoDVCalculatorButton);
-        createUserMission = findViewById(R.id.createMissionButton);
+        routeTitleTextView = findViewById(R.id.routeNameTextView);
+        routePlanetsTextView = findViewById(R.id.planetsInRouteTextView);
+        routeDVTextView = findViewById(R.id.routeDvTextView);
+        routeDescriptionTextView = findViewById(R.id.routeDescriptionTextView);
+        routeCreatorTextView = findViewById(R.id.routeCreatorTextView);
 
-        routeDescription = findViewById(R.id.routeDetailTextView);
-        DvEstimate = findViewById(R.id.routeDetailDVTextView);
+        Route routeToView = (Route) getIntent().getParcelableExtra("selectedRouteToView");
+        assert routeToView != null;
 
-        // Route details from previous intent
-        final ArrayList<String> plannedRoute = getIntent().getStringArrayListExtra("plannedRoute");
-        // Set text views to display planet route info
-        setTextViewsFromRouteDetails(plannedRoute);
-
-
-        // set listeners
-        // Button: Checklist
-        gotoChecklist.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(CreateShareRouteActivity.this, ChecklistListViewActivity.class));
-            }
-        });
-
-        // Button: DV Calculator
-        gotoDVCalculator.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(CreateShareRouteActivity.this, DvCalculatorActivity.class));
-            }
-        });
-
-        // Button: Create Mission
-        createUserMission.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent newIntent = new Intent(CreateShareRouteActivity.this, SaveRouteActivity.class);
-                newIntent.putStringArrayListExtra("planetsInRoute", plannedRoute);
-                startActivity(newIntent);
-                finish();
-            }
-        });
+        setTextViews(routeToView);
     }
 
-    private void setTextViewsFromRouteDetails(ArrayList<String> planetsInRoute) {
-        routeDescription.setText(String.format("Approximate ∆v required from %s to %s:", planetsInRoute.get(0), planetsInRoute.get(1)));
-        DvEstimate.setText("0");
+    private void setTextViews(Route intentObj) {
+        routeTitleTextView.setText(intentObj.route.get("routeName").toString());
+        routePlanetsTextView.setText(String.format("%s to %s", intentObj.route.get("startPlanet").toString(), intentObj.route.get("destPlanet").toString()));
+        routeDescriptionTextView.setText(intentObj.route.get("routeDescription").toString());
 
-        estimateRouteDeltaV(planetsInRoute);
+        routeCreatorTextView.setText(intentObj.metaData.get("creator").toString());
+
+        ArrayList<String> routeArray = new ArrayList<>();
+        routeArray.add(intentObj.route.get("startPlanet").toString());
+        routeArray.add(intentObj.route.get("destPlanet").toString());
+        estimateRouteDeltaV(routeArray);
     }
 
     private void estimateRouteDeltaV(ArrayList<String> planetsInRoute) {
@@ -93,7 +61,11 @@ public class CreateShareRouteActivity extends AppCompatActivity {
             kerbinInRouteFlag = true;
         }
 
+        System.out.println("run1");
+        System.out.println(routeDVTextView.getText().toString());
         getPlanetKDV(planetsInRoute.get(0), kerbinInRouteFlag);
+        System.out.println(routeDVTextView.getText().toString());
+        System.out.println("run2");
         getPlanetKDV(planetsInRoute.get(1), kerbinInRouteFlag);
     }
 
@@ -115,16 +87,15 @@ public class CreateShareRouteActivity extends AppCompatActivity {
                 HashMap value = (HashMap) dataSnapshot.getValue();
 
                 // Logic for calculating the est DV.
-                int currDv = Integer.valueOf(DvEstimate.getText().toString());
+                int currDv = Integer.valueOf(routeDVTextView.getText().toString());
 
                 if (kerbinInRoute) {
                     currDv += Integer.valueOf(value.get("kDV").toString());
-                }
-                else {
+                } else {
                     currDv += Integer.valueOf(value.get("kDV").toString()) - 3400;
                 }
 
-                DvEstimate.setText(String.valueOf(currDv));
+                routeDVTextView.setText(String.valueOf(currDv));
 
                 Log.d(TAG, "Value is: " + value);
             }

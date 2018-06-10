@@ -14,9 +14,10 @@ public class CreateRouteDestActivity extends AppCompatActivity {
 
     ViewPager mViewPager;
     Button planetSelectButton;
+    Button planetInfoButton;
 
     private ArrayList<String> planetsInRoute = new ArrayList<>();
-    private String[] planetNameList = {"Moho", "Eve", "Gilly", "Kerbin", "Mun", "Minmus", "Duna", "Ike", "Jool", "Laythe", "Vall", "Tylo", "Bop", "Eeloo"};
+    private String[] planetNameList = {"Moho", "Eve", "Gilly", "Kerbin", "Mun", "Minmus", "Duna", "Ike","Dres", "Jool", "Laythe", "Vall", "Tylo", "Bop", "Eeloo"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,7 +30,7 @@ public class CreateRouteDestActivity extends AppCompatActivity {
         assert startingPlanet != null;
 
         // Set up the ViewPager with the sections adapter.
-        mViewPager = findViewById(R.id.c_r_vp_dest);
+        mViewPager = findViewById(R.id.destPlanetViewPager);
         mViewPager.setAdapter(new SectionsPagerAdapter(getSupportFragmentManager(), setupPlanetFragments()));
         mViewPager.setCurrentItem(3);
 
@@ -37,19 +38,10 @@ public class CreateRouteDestActivity extends AppCompatActivity {
         mViewPager.setPadding(100,0,100,0);
 
         planetSelectButton = findViewById(R.id.destPlanetButton);
+        planetInfoButton = findViewById(R.id.destPlanetInfoButton);
 
         // set listeners
-        // Button: Routes and user missions
-//        planetImage.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent newIntent = new Intent(CreateRouteDestActivity.this, PlanetInfoActivity.class);
-//                newIntent.putExtra("planetToView", tempPlanetSelection);
-//                startActivity(newIntent);
-//            }
-//        });
-//
-//        // Button: Select destination, and finish route creation
+        // Button: Select destination, and finish route creation
         planetSelectButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -61,6 +53,17 @@ public class CreateRouteDestActivity extends AppCompatActivity {
 
                 // Pass along the route array to the final activity in the route creation
                 newIntent.putStringArrayListExtra("plannedRoute", planetsInRoute);
+                startActivity(newIntent);
+                finish();
+            }
+        });
+
+        // Button: View planet info
+        planetInfoButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent newIntent = new Intent(CreateRouteDestActivity.this, PlanetInfoActivity.class);
+                newIntent.putExtra("planetToView",  planetNameList[mViewPager.getCurrentItem()]);
                 startActivity(newIntent);
             }
         });

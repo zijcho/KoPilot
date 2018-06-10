@@ -4,23 +4,50 @@ package monash.zi.kopilot;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import java.util.ArrayList;
+import com.google.android.gms.maps.model.LatLng;
 
-public class Route implements Parcelable {
+import java.util.HashMap;
+import java.util.Map;
 
-    private String routeName;
+class Route implements Parcelable{
+    protected Map route;
+    protected Map metaData;
+    protected Map createLocation;
 
-    private String routeDescription;
-    private String startPlanet;
-    private String destPlanet;
-    private ArrayList<String> stops;
+    protected String locationName;
+    protected String locationDesc;
+    protected LatLng latLng;
+
+    public Route(String inLocationName, LatLng inLatLng) {
+        this.locationName = inLocationName;
+        this.latLng = inLatLng;
+    }
+
+    public Route(Map jsonMap) {
+        // Pure string map object (from json)
+        this.route = jsonMap;
+        this.metaData = (Map) route.get("metaData");
+        this.createLocation = (Map) metaData.get("createLocation");
+
+        this.locationName = (String) jsonMap.get("routeName");
+        this.locationDesc = (String) jsonMap.get("routeDescription");
+        this.latLng = new LatLng(Double.valueOf(createLocation.get("latitude").toString()), Double.valueOf(createLocation.get("longitude").toString()));
+    }
+
+    @Override
+    public String toString() {
+        return displayDetails();
+    }
+
+    public String displayDetails() {
+        return String.format("%s\n%s", locationName, route.get("routeDescription"));
+    }
 
     protected Route(Parcel in) {
-        routeName = in.readString();
-        routeDescription = in.readString();
-        startPlanet = in.readString();
-        destPlanet = in.readString();
-        stops = in.createStringArrayList();
+        route = new HashMap<String, Object>();
+        in.readMap(route, Object.class.getClassLoader());
+        metaData = new HashMap<String, Object>();
+        in.readMap(metaData, Object.class.getClassLoader());
     }
 
     public static final Creator<Route> CREATOR = new Creator<Route>() {
@@ -42,51 +69,7 @@ public class Route implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(routeName);
-        dest.writeString(routeDescription);
-        dest.writeString(startPlanet);
-        dest.writeString(destPlanet);
-        dest.writeStringList(stops);
+        dest.writeMap(route);
+        dest.writeMap(metaData);
     }
-
-    public String getRouteName() {
-        return routeName;
-    }
-
-    public void setRouteName(String routeName) {
-        this.routeName = routeName;
-    }
-
-    public String getRouteDescription() {
-        return routeDescription;
-    }
-
-    public void setRouteDescription(String routeDescription) {
-        this.routeDescription = routeDescription;
-    }
-
-    public String getStartPlanet() {
-        return startPlanet;
-    }
-
-    public void setStartPlanet(String startPlanet) {
-        this.startPlanet = startPlanet;
-    }
-
-    public String getDestPlanet() {
-        return destPlanet;
-    }
-
-    public void setDestPlanet(String destPlanet) {
-        this.destPlanet = destPlanet;
-    }
-
-    public ArrayList<String> getStops() {
-        return stops;
-    }
-
-    public void setStops(ArrayList<String> stops) {
-        this.stops = stops;
-    }
-
 }

@@ -5,10 +5,6 @@ import android.os.Parcelable;
 
 import java.util.ArrayList;
 
-/**
- * Created by Zi C on 30-Apr-18.
- */
-
 public class Checklist implements Parcelable{
     // Todo: local persistence or otherwise.
 

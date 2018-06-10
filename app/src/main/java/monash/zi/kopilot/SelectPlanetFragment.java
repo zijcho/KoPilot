@@ -71,10 +71,6 @@ public class SelectPlanetFragment extends Fragment {
         super.onDetach();
     }
 
-    public String getPlanetNameText(){
-       return planetNameText;
-    }
-
     private void loadDefaultDataFirebase(String planetToLoadString) {
         // Create a storage reference from our app
         FirebaseStorage storage = FirebaseStorage.getInstance();
