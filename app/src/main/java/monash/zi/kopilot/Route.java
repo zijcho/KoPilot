@@ -9,7 +9,6 @@ import java.util.ArrayList;
 public class Route implements Parcelable {
 
     private String routeName;
-
     private String routeDescription;
     private String startPlanet;
     private String destPlanet;

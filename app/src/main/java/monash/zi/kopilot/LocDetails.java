@@ -28,6 +28,7 @@ class LocDetails {
     }
 
     public LocDetails(Map jsonMap) {
+        // Pure string map object (from json)
         this.route = jsonMap;
         this.metaData = (Map) route.get("metaData");
         this.createLocation = (Map) metaData.get("createLocation");
