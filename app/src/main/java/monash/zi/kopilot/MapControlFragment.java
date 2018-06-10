@@ -24,14 +24,14 @@ import java.util.ArrayList;
 public class MapControlFragment extends android.support.v4.app.Fragment implements OnMapReadyCallback, GoogleMap.OnMapLongClickListener {
     private GoogleMap mMap;
     private OnMapClicked mListener;
-    private ArrayList<LocDetails> mSavedLocations;
+    private ArrayList<Route> mSavedLocations;
     private LatLng mCurrentLoc;
     public MapControlFragment() {
         mSavedLocations = new ArrayList<>();
         mCurrentLoc = new LatLng(-37.8770, 145.0443);
     }
     public void initFragment(OnMapClicked listener,
-                             ArrayList<LocDetails> locations) {
+                             ArrayList<Route> locations) {
         mListener = listener;
         mSavedLocations = locations;
     }
@@ -57,7 +57,7 @@ public class MapControlFragment extends android.support.v4.app.Fragment implemen
     public void updateMapMarkers() {
         if (mMap != null) {
             mMap.clear();
-            for (LocDetails location : mSavedLocations) {
+            for (Route location : mSavedLocations) {
                 mMap.addMarker(new MarkerOptions()
                         .position(location.latLng)
                         .title(location.locationName));

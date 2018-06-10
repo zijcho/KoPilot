@@ -20,7 +20,7 @@ import static android.content.ContentValues.TAG;
 public class RouteUserMissionsActivity extends AppCompatActivity implements LocationListFragment.OnLocationSelectedListener,
         MapControlFragment.OnMapClicked {
     private boolean mIsTwoPane;
-    private ArrayList<LocDetails> mSavedLocations = new ArrayList<>();
+    private ArrayList<Route> mSavedLocations = new ArrayList<>();
     private LocationListFragment mListFragment;
     private MapControlFragment mMapFragment;
     private FrameLayout mPrimaryFrame;
@@ -48,7 +48,7 @@ public class RouteUserMissionsActivity extends AppCompatActivity implements Loca
         }
     }
 
-    private  ArrayList<LocDetails> loadRoutesFromFirebase() {
+    private  ArrayList<Route> loadRoutesFromFirebase() {
         mSavedLocations = new ArrayList<>();
 
         // Set refs to the database
@@ -86,8 +86,7 @@ public class RouteUserMissionsActivity extends AppCompatActivity implements Loca
             double latVal = Double.valueOf(routeLatLng.get("latitude").toString());
             double lngVal = Double.valueOf(routeLatLng.get("longitude").toString());
 
-//            LocDetails routeObj = new LocDetails(routeName, new LatLng(latVal, lngVal));
-            LocDetails routeObj = new LocDetails(singleRoute);
+            Route routeObj = new Route(singleRoute);
             mSavedLocations.add(routeObj);
         }
 
@@ -108,7 +107,7 @@ public class RouteUserMissionsActivity extends AppCompatActivity implements Loca
 
     @Override
     public void onMapClicked(String locName, LatLng position) {
-        mSavedLocations.add(new LocDetails(locName, position));
+        mSavedLocations.add(new Route(locName, position));
         mMapFragment.updateMapMarkers();
         mListFragment.refreshList();
     }

@@ -9,7 +9,7 @@ import com.google.android.gms.maps.model.LatLng;
 import java.util.HashMap;
 import java.util.Map;
 
-class LocDetails implements Parcelable{
+class Route implements Parcelable{
     protected Map route;
     protected Map metaData;
     protected Map createLocation;
@@ -18,12 +18,12 @@ class LocDetails implements Parcelable{
     protected String locationDesc;
     protected LatLng latLng;
 
-    public LocDetails(String inLocationName, LatLng inLatLng) {
+    public Route(String inLocationName, LatLng inLatLng) {
         this.locationName = inLocationName;
         this.latLng = inLatLng;
     }
 
-    public LocDetails(Map jsonMap) {
+    public Route(Map jsonMap) {
         // Pure string map object (from json)
         this.route = jsonMap;
         this.metaData = (Map) route.get("metaData");
@@ -43,26 +43,22 @@ class LocDetails implements Parcelable{
         return String.format("%s\n%s", locationName, route.get("routeDescription"));
     }
 
-    protected LocDetails(Parcel in) {
-        //        locationName = in.readString();
-        //        locationDesc = in.readString();
-        //        latLng = in.readParcelable(LatLng.class.getClassLoader());
-
+    protected Route(Parcel in) {
         route = new HashMap<String, Object>();
         in.readMap(route, Object.class.getClassLoader());
         metaData = new HashMap<String, Object>();
         in.readMap(metaData, Object.class.getClassLoader());
     }
 
-    public static final Creator<LocDetails> CREATOR = new Creator<LocDetails>() {
+    public static final Creator<Route> CREATOR = new Creator<Route>() {
         @Override
-        public LocDetails createFromParcel(Parcel in) {
-            return new LocDetails(in);
+        public Route createFromParcel(Parcel in) {
+            return new Route(in);
         }
 
         @Override
-        public LocDetails[] newArray(int size) {
-            return new LocDetails[size];
+        public Route[] newArray(int size) {
+            return new Route[size];
         }
     };
 
@@ -73,9 +69,6 @@ class LocDetails implements Parcelable{
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        //        dest.writeString(locationName);
-        //        dest.writeString(locationDesc);
-        //        dest.writeParcelable(latLng, flags);
         dest.writeMap(route);
         dest.writeMap(metaData);
     }

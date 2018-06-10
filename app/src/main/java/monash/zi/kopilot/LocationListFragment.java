@@ -15,14 +15,14 @@ import com.google.android.gms.maps.model.LatLng;
 import java.util.ArrayList;
 
 public class LocationListFragment extends Fragment implements AdapterView.OnItemClickListener {
-    private ArrayList<LocDetails> mSavedLocations;
+    private ArrayList<Route> mSavedLocations;
     private OnLocationSelectedListener mListener;
     private ListView mListView;
-    private ArrayAdapter<LocDetails> mAdapter;
+    private ArrayAdapter<Route> mAdapter;
     public LocationListFragment() {
         mSavedLocations = new ArrayList<>();
     }
-    public void initFragment(OnLocationSelectedListener listener, ArrayList<LocDetails> locations) {
+    public void initFragment(OnLocationSelectedListener listener, ArrayList<Route> locations) {
         mSavedLocations = locations;
         mListener = listener;
     }
@@ -46,7 +46,7 @@ public class LocationListFragment extends Fragment implements AdapterView.OnItem
         if(mListener != null) {
             mListener.onLocationSelected(mSavedLocations.get(position).latLng);
 
-            LocDetails intentObj = mSavedLocations.get(position);
+            Route intentObj = mSavedLocations.get(position);
 
             Intent newIntent = new Intent(getActivity(), RouteViewMissionActivity.class);
             newIntent.putExtra("selectedRouteToView", intentObj);

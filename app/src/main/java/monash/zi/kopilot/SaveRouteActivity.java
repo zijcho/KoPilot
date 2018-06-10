@@ -92,45 +92,38 @@ public class SaveRouteActivity extends AppCompatActivity implements
                     DatabaseReference myRef = database.getReference("Routes");
 
                     // Construct JSON map to upload to firebase
-                    Map locDetailMap = new HashMap();
-                    locDetailMap.put("routeName", routeTitleEditText.getText().toString());
-                    locDetailMap.put("routeDescription", routeDescriptionEditText.getText().toString());
-                    locDetailMap.put("startPlanet", routeToSave.get(0));
-                    locDetailMap.put("destPlanet", routeToSave.get(1));
+                    Map routeMap = new HashMap();
+                    routeMap.put("routeName", routeTitleEditText.getText().toString());
+                    routeMap.put("routeDescription", routeDescriptionEditText.getText().toString());
+                    routeMap.put("startPlanet", routeToSave.get(0));
+                    routeMap.put("destPlanet", routeToSave.get(1));
 
-                    Map locDetailMetaDataMap = new HashMap();
-                    locDetailMetaDataMap.put("creator", routeCreatorEditText.getText().toString());
+                    Map routeMetaDataMap = new HashMap();
+                    routeMetaDataMap.put("creator", routeCreatorEditText.getText().toString());
 
-                    Map locDetailCreateLocation = new HashMap();
+                    Map routeCreateLocation = new HashMap();
                     if (canAccessLocation) {
-                        locDetailCreateLocation.put("latitude", String.valueOf(getGPS()[0]));
-                        locDetailCreateLocation.put("longitude", String.valueOf(getGPS()[1]));
+                        routeCreateLocation.put("latitude", String.valueOf(getGPS()[0]));
+                        routeCreateLocation.put("longitude", String.valueOf(getGPS()[1]));
                     } else {
                         // Default to melbourne CBD as the source of the route if permissions not allowed
                         Toast.makeText(getApplicationContext(), "No locations permissions granted, defaulting location.", Toast.LENGTH_SHORT).show();
-                        locDetailCreateLocation.put("latitude", "-37.814");
-                        locDetailCreateLocation.put("longitude", "144.9633");
+                        routeCreateLocation.put("latitude", "-37.814");
+                        routeCreateLocation.put("longitude", "144.9633");
                     }
 
-                    locDetailMap.put("metaData", locDetailMetaDataMap);
-                    locDetailMetaDataMap.put("createLocation", locDetailCreateLocation);
+                    routeMap.put("metaData", routeMetaDataMap);
+                    routeMetaDataMap.put("createLocation", routeCreateLocation);
 
                     // set value on Firebase
-                    String refChildStr = String.valueOf(locDetailMap.get("routeName"));
-                    myRef.child(refChildStr).setValue(locDetailMap);
+                    String refChildStr = String.valueOf(routeMap.get("routeName"));
+                    myRef.child(refChildStr).setValue(routeMap);
                     finish();
                 } else {
                     Toast.makeText(getApplicationContext(), "Missing input", Toast.LENGTH_SHORT).show();
                 }
             }
         });
-
-
-        // Save the details of the route from text views into the parceleable route object. (May not be need for upload)
-        // Upload to firebase:
-        //  Route details
-        //  Location details
-        // Return to create/view screen when done.
     }
 
     public void requestPermissions() {
@@ -144,7 +137,6 @@ public class SaveRouteActivity extends AppCompatActivity implements
                     new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION},
                     LOCATION_REQUEST_CODE);
         }
-
     }
 
     private boolean validateEditTexts() {
@@ -202,26 +194,25 @@ public class SaveRouteActivity extends AppCompatActivity implements
     }
 
     private double[] getGPS() {
-        LocationManager lm = (LocationManager) getSystemService(
-                Context.LOCATION_SERVICE);
-        List<String> providers = lm.getProviders(true);
+        LocationManager locManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        List<String> providers = locManager.getProviders(true);
 
-        Location l = null;
+        Location location = null;
 
         for (int i = providers.size() - 1; i >= 0; i--) {
             if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                l = lm.getLastKnownLocation(providers.get(i));
-                if (l != null) break;
+                location = locManager.getLastKnownLocation(providers.get(i));
+                if (location != null) break;
             }
         }
 
-        double[] gps = new double[2];
-        if (l != null) {
-            gps[0] = l.getLatitude();
-            gps[1] = l.getLongitude();
+        double[] gpsArr = new double[2];
+        if (location != null) {
+            gpsArr[0] = location.getLatitude();
+            gpsArr[1] = location.getLongitude();
         }
 
-        return gps;
+        return gpsArr;
     }
 
     @Override

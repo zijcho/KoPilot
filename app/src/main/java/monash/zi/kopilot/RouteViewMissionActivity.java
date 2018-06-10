@@ -35,13 +35,13 @@ public class RouteViewMissionActivity extends AppCompatActivity {
         routeDescriptionTextView = findViewById(R.id.routeDescriptionTextView);
         routeCreatorTextView = findViewById(R.id.routeCreatorTextView);
 
-        LocDetails routeToView = (LocDetails) getIntent().getParcelableExtra("selectedRouteToView");
+        Route routeToView = (Route) getIntent().getParcelableExtra("selectedRouteToView");
         assert routeToView != null;
 
         setTextViews(routeToView);
     }
 
-    private void setTextViews(LocDetails intentObj) {
+    private void setTextViews(Route intentObj) {
         routeTitleTextView.setText(intentObj.route.get("routeName").toString());
         routePlanetsTextView.setText(String.format("%s to %s", intentObj.route.get("startPlanet").toString(), intentObj.route.get("destPlanet").toString()));
         routeDescriptionTextView.setText(intentObj.route.get("routeDescription").toString());
